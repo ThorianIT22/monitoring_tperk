@@ -9,7 +9,7 @@
 - **VM1 (Log Server)**
   - IP Address: [IP]
   - OS Version: Debian GNU/Linux 12.8
-  - Role: Central Log Server
+  - Role: Client Server
 
 - **VM2 (Client)**
   - IP Address: [IP]
