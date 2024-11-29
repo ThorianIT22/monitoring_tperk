@@ -7,12 +7,12 @@
 ## Environment Setup
 ### VM Configuration
 - **VM1 (Log Server)**
-  - IP Address: [IP]
+  - IP Address: 192.168.5.200/24
   - OS Version: Debian GNU/Linux 12.8
   - Role: Client Server
 
 - **VM2 (Client)**
-  - IP Address: [IP]
+  - IP Address: 192.168.5.229/24
   - OS Version: Debian GNU/Linux 12.8
   - Role: Logging Server
 
@@ -25,12 +25,12 @@
 ### 2. Logging Configuration
 - [x] Set up rsyslog forwarding
 - [x] Configured log rotation
-- [ ] Implemented audit rules
+- [x] Implemented audit rules
 
 ### 3. Dashboard Implementation
-- [ ] Created monitoring dashboard
-- [ ] Implemented real-time analysis
-- [ ] Added visualization features
+- [x] Created monitoring dashboard
+- [x] Implemented real-time analysis
+- [-] Added visualization features
 
 ## Testing Results
 ### Security Tests
@@ -46,7 +46,7 @@
 \`\`\`
 
 ### Dashboard Output
-[Screenshot or output of your dashboard]
+![alt text](image.png)
 
 ## Challenges and Solutions
 1. [Describe any challenges you faced]
