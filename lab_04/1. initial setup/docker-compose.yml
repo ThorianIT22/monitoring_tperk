@@ -1,0 +1,51 @@
+version: '3'
+services:
+  # InfluxDB
+  influxdb:
+    image: influxdb:latest
+    ports:
+      - "8086:8086"
+    volumes:
+      - ./influxdb/data:/var/lib/influxdb2
+      - ./influxdb/config:/etc/influxdb2
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=adminpassword
+      - DOCKER_INFLUXDB_INIT_ORG=myorg
+      - DOCKER_INFLUXDB_INIT_BUCKET=default
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=my-super-secret-auth-token
+
+  # Telegraf
+  telegraf:
+    image: telegraf:latest
+    volumes:
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    depends_on:
+      - influxdb
+
+  # Chronograf
+  chronograf:
+    image: chronograf:latest
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./chronograf/data:/var/lib/chronograf
+    depends_on:
+      - influxdb
+    environment:
+      - INFLUXDB_URL=http://influxdb:8086
+      - INFLUXDB_TOKEN=my-super-secret-auth-token
+      - INFLUXDB_ORG=myorg
+
+  # Kapacitor
+  kapacitor:
+    image: kapacitor:latest
+    ports:
+      - "9092:9092"
+    volumes:
+      - ./kapacitor/data:/var/lib/kapacitor
+    depends_on:
+      - influxdb
+    environment:
+      - KAPACITOR_INFLUXDB_0_URLS_0=http://influxdb:8086
